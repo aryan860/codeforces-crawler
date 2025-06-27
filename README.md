@@ -1,4 +1,4 @@
-# codeforces-crawler
+# Codeforces-Crawler
 A website that recommends problems, virtual contests and shows user statistics for users of the coding platform codeforces.   
 Link of the website: [CodeForces Crawler](http://cfcrawler.pythonanywhere.com/)
 
@@ -44,9 +44,4 @@ It compares the following features for two users-
 - Team rating   
 It calculates team rating, rank and color for 1-4 users.
 
-This project uses Django as its Web framework. Though Beautiful Soup was used initially for web scraping, Codeforces API was used later.
-
-It has been developed by-
-- Divyam Singal
-- Manish Prajapati
-- Anant Shankhdhar
+This project uses Django as its Web framework. Codeforces API is used for Web Scraping.

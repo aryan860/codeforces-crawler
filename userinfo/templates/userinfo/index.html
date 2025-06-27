@@ -1,0 +1,157 @@
+{% load static %}
+
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Crawler</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/indexStylesheet.css'%}" type="text/css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+  </head>
+
+
+<body>
+
+
+  <div class="card-custom">
+      <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <a class="navbar-brand" href="{% url 'userinfo:index' %}" style="font-weight: 700; font-family: 'GT Walsheim Pro';">CodeForces Crawler</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fa fa-angle-double-down"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="https://github.com/AnantShankhdhar/codeforces-crawler" target="_blank" style="font-weight: 700; font-family: 'GT Walsheim Pro';" >Github</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav navbar-right">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-weight: 500; font-family: 'GT Walsheim Pro'; margin-right:3rem;">
+                Contributors
+              </a>
+              <div class="dropdown-menu " aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="https://www.linkedin.com/in/divyam-singal-416720196/" target="_blank" style=" font-family: 'GT Walsheim Pro';">Divyam Singal</a>
+                <a class="dropdown-item" href="https://www.linkedin.com/in/manish-prajapati-9970641a0/" target="_blank" style=" font-family: 'GT Walsheim Pro';">Manish Prajapati</a>
+                <a class="dropdown-item" href="https://www.linkedin.com/in/anantshankhdhar/" target="_blank" style=" font-family: 'GT Walsheim Pro';">Anant Shankhdhar</a>
+              </div>
+            </li>
+
+          </ul>
+        </div>
+      </nav>
+    </div>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3 singleuser card">
+      <h3 class="toptext">Check user statistics</h3>
+      <form action="{% url 'userinfo:detail' %}" method="post">
+          {% csrf_token %}
+          <label for="handle">
+                  User handle:
+          </label><br>
+          <input type="text" id="handle" placeholder="handle" required name="user" /><br>
+          <input type="submit" value="Submit">
+
+      </form>
+    </div>
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-3 comparesuser card">
+      <h3 class="toptext">Compare two users</h3>
+      <form action="{% url 'userinfo:Compares' %}" method="post">
+          {% csrf_token %}
+          <label for="Firsthandle" >
+                  User handle First:
+          </label>
+          <br>
+          <input type="text" id="Firsthandle"  placeholder = "handle 1" required name="Firstuser"/>
+          <br>
+          <label for="Secondhandle">
+                  User handle Second:
+          </label>
+          <br>
+          <input type="text" id="Secondhandle" placeholder = "handle 2" required name="Seconduser"/>
+          <br>
+          <input type="submit" value="Submit">
+      </form>
+    </div>
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-3 teamuser card">
+      <h3 class="toptext">Check Team Rating</h3>
+      <form action="{% url 'userinfo:teamrate' %}" method="post">
+          {% csrf_token %}
+          <label for="handle1">
+                  User handle1:
+          </label><br>
+          <input type="text" id="handle1" placeholder="handle 1" name="user1" /><br>
+          <label for="handle2">
+                  User handle2:
+          </label><br>
+          <input type="text" id="handle2" name="user2" placeholder="handle 2" /><br>
+          <label for="handle3">
+                  User handle3:
+          </label><br>
+          <input type="text" id="handle3" name="user3" placeholder = "handle 3" /><br>
+          <label for="handle4">
+                  User handle4:
+          </label><br>
+          <input type="text" id="handle4" name="user4" placeholder = "handle 4" /><br>
+          <input type="submit" value="Submit">
+          <p>{{error}}</p>
+      </form>
+    </div>
+  </div>
+  <br>
+  {% if messages %}
+    <ul class="messages" style="color: red; ">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+  {% endif %}
+  <br>
+  <br>
+    <div class="row card ">
+      <div class="col-md-4">
+
+      </div>
+      <div class="col-md-4 thankscard">
+        Thanks For Using, visit <a href="https://github.com/AnantShankhdhar/codeforces-crawler" style=" font-family: 'GT Walsheim Pro';" target="_blank">Github</a>
+      </div>
+      <div class="col-md-4">
+
+      </div>
+    </div>
+</div>
+
+
+{% if error_message %}
+    <p class="error"><strong>{{ error_message }}</strong></p>
+{% endif %}
+
+
+
+<script>
+    $(document).on('click','.navbar-collapse.in',function(e) {
+      if( $(e.target).is('a:not(".dropdown-toggle")') ) {
+          $(this).collapse('hide');
+      }
+    });
+  </script>
+
+<!-- Optional Javascript -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+
+
+</body>
+</html>
